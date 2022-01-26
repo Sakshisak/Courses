@@ -1,0 +1,32 @@
+Table: customers
+Candidate Keys: customerNumber, customerName
+Foreign Key: customerNumber references customerNumber in payments, salesRepEmployeeNumber refernces employeeNumber in employees
+
+Table: offices
+Candidate Keys:officeCode, phone
+Foreign Keys:
+
+Table: orders
+Candidate Keys:orderNumber
+Foreign Keys: customerNumber references customerNumber in customers, orderNumber references orderNumber in orderdetails.
+
+Table: productlines
+Candidate Keys:productline
+Foreign Keys:
+
+Table: employees
+Candidate Keys:employeeNumber
+Foreign Keys: officeCode references officeCode in offices
+employeeNumberreferences employeeNumber in employees
+
+Table: orderdetails
+Candidate Keys:orderNumber
+Foreign Keys: productCode references productCode in products
+
+Table: payments
+Candidate Keys:checkNumber
+Foreign Keys: customerNumber references customerNumber in customers
+
+Table: products
+Candidate Keys: productCode, productName
+Foreign Keys: productline references productline in productlines,  productCode references productCode in orderdetails

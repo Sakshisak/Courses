@@ -1,0 +1,12 @@
+US1
+-nan
+US2
+-nan
+Japan1
+-nan
+Japan2
+-nan
+Europe1
+-nan
+Europe2
+-nan

@@ -1,0 +1,346 @@
+Grammar
+
+    0 $accept: program $end
+
+    1 program: stmt_list
+
+    2 stmt_list: stmt_list assignment ';'
+    3          | stmt_list print exp ';'
+    4          | stmt_list exit_command ';'
+    5          | %empty
+
+    6 assignment: identifier '=' exp
+
+    7 exp: term
+    8    | exp '+' exp
+    9    | exp '-' exp
+   10    | exp '*' exp
+   11    | exp '/' exp
+   12    | '(' exp ')'
+
+   13 term: number
+   14     | identifier
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 12
+')' (41) 12
+'*' (42) 10
+'+' (43) 8
+'-' (45) 9
+'/' (47) 11
+';' (59) 2 3 4
+'=' (61) 6
+error (256)
+print (258) 3
+exit_command (259) 4
+number (260) 13
+identifier (261) 6 14
+
+
+Nonterminals, with rules where they appear
+
+$accept (15)
+    on left: 0
+program (16)
+    on left: 1, on right: 0
+stmt_list (17)
+    on left: 2 3 4 5, on right: 1 2 3 4
+assignment (18)
+    on left: 6, on right: 2
+exp (19)
+    on left: 7 8 9 10 11 12, on right: 3 6 8 9 10 11 12
+term (20)
+    on left: 13 14, on right: 7
+
+
+State 0
+
+    0 $accept: . program $end
+
+    $default  reduce using rule 5 (stmt_list)
+
+    program    go to state 1
+    stmt_list  go to state 2
+
+
+State 1
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 3
+
+
+State 2
+
+    1 program: stmt_list .
+    2 stmt_list: stmt_list . assignment ';'
+    3          | stmt_list . print exp ';'
+    4          | stmt_list . exit_command ';'
+
+    print         shift, and go to state 4
+    exit_command  shift, and go to state 5
+    identifier    shift, and go to state 6
+
+    $default  reduce using rule 1 (program)
+
+    assignment  go to state 7
+
+
+State 3
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 4
+
+    3 stmt_list: stmt_list print . exp ';'
+
+    number      shift, and go to state 8
+    identifier  shift, and go to state 9
+    '('         shift, and go to state 10
+
+    exp   go to state 11
+    term  go to state 12
+
+
+State 5
+
+    4 stmt_list: stmt_list exit_command . ';'
+
+    ';'  shift, and go to state 13
+
+
+State 6
+
+    6 assignment: identifier . '=' exp
+
+    '='  shift, and go to state 14
+
+
+State 7
+
+    2 stmt_list: stmt_list assignment . ';'
+
+    ';'  shift, and go to state 15
+
+
+State 8
+
+   13 term: number .
+
+    $default  reduce using rule 13 (term)
+
+
+State 9
+
+   14 term: identifier .
+
+    $default  reduce using rule 14 (term)
+
+
+State 10
+
+   12 exp: '(' . exp ')'
+
+    number      shift, and go to state 8
+    identifier  shift, and go to state 9
+    '('         shift, and go to state 10
+
+    exp   go to state 16
+    term  go to state 12
+
+
+State 11
+
+    3 stmt_list: stmt_list print exp . ';'
+    8 exp: exp . '+' exp
+    9    | exp . '-' exp
+   10    | exp . '*' exp
+   11    | exp . '/' exp
+
+    '+'  shift, and go to state 17
+    '-'  shift, and go to state 18
+    '*'  shift, and go to state 19
+    '/'  shift, and go to state 20
+    ';'  shift, and go to state 21
+
+
+State 12
+
+    7 exp: term .
+
+    $default  reduce using rule 7 (exp)
+
+
+State 13
+
+    4 stmt_list: stmt_list exit_command ';' .
+
+    $default  reduce using rule 4 (stmt_list)
+
+
+State 14
+
+    6 assignment: identifier '=' . exp
+
+    number      shift, and go to state 8
+    identifier  shift, and go to state 9
+    '('         shift, and go to state 10
+
+    exp   go to state 22
+    term  go to state 12
+
+
+State 15
+
+    2 stmt_list: stmt_list assignment ';' .
+
+    $default  reduce using rule 2 (stmt_list)
+
+
+State 16
+
+    8 exp: exp . '+' exp
+    9    | exp . '-' exp
+   10    | exp . '*' exp
+   11    | exp . '/' exp
+   12    | '(' exp . ')'
+
+    '+'  shift, and go to state 17
+    '-'  shift, and go to state 18
+    '*'  shift, and go to state 19
+    '/'  shift, and go to state 20
+    ')'  shift, and go to state 23
+
+
+State 17
+
+    8 exp: exp '+' . exp
+
+    number      shift, and go to state 8
+    identifier  shift, and go to state 9
+    '('         shift, and go to state 10
+
+    exp   go to state 24
+    term  go to state 12
+
+
+State 18
+
+    9 exp: exp '-' . exp
+
+    number      shift, and go to state 8
+    identifier  shift, and go to state 9
+    '('         shift, and go to state 10
+
+    exp   go to state 25
+    term  go to state 12
+
+
+State 19
+
+   10 exp: exp '*' . exp
+
+    number      shift, and go to state 8
+    identifier  shift, and go to state 9
+    '('         shift, and go to state 10
+
+    exp   go to state 26
+    term  go to state 12
+
+
+State 20
+
+   11 exp: exp '/' . exp
+
+    number      shift, and go to state 8
+    identifier  shift, and go to state 9
+    '('         shift, and go to state 10
+
+    exp   go to state 27
+    term  go to state 12
+
+
+State 21
+
+    3 stmt_list: stmt_list print exp ';' .
+
+    $default  reduce using rule 3 (stmt_list)
+
+
+State 22
+
+    6 assignment: identifier '=' exp .
+    8 exp: exp . '+' exp
+    9    | exp . '-' exp
+   10    | exp . '*' exp
+   11    | exp . '/' exp
+
+    '+'  shift, and go to state 17
+    '-'  shift, and go to state 18
+    '*'  shift, and go to state 19
+    '/'  shift, and go to state 20
+
+    $default  reduce using rule 6 (assignment)
+
+
+State 23
+
+   12 exp: '(' exp ')' .
+
+    $default  reduce using rule 12 (exp)
+
+
+State 24
+
+    8 exp: exp . '+' exp
+    8    | exp '+' exp .
+    9    | exp . '-' exp
+   10    | exp . '*' exp
+   11    | exp . '/' exp
+
+    '*'  shift, and go to state 19
+    '/'  shift, and go to state 20
+
+    $default  reduce using rule 8 (exp)
+
+
+State 25
+
+    8 exp: exp . '+' exp
+    9    | exp . '-' exp
+    9    | exp '-' exp .
+   10    | exp . '*' exp
+   11    | exp . '/' exp
+
+    '*'  shift, and go to state 19
+    '/'  shift, and go to state 20
+
+    $default  reduce using rule 9 (exp)
+
+
+State 26
+
+    8 exp: exp . '+' exp
+    9    | exp . '-' exp
+   10    | exp . '*' exp
+   10    | exp '*' exp .
+   11    | exp . '/' exp
+
+    $default  reduce using rule 10 (exp)
+
+
+State 27
+
+    8 exp: exp . '+' exp
+    9    | exp . '-' exp
+   10    | exp . '*' exp
+   11    | exp . '/' exp
+   11    | exp '/' exp .
+
+    $default  reduce using rule 11 (exp)

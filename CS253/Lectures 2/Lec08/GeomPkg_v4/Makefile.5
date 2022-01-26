@@ -1,0 +1,25 @@
+CC=gcc
+INC=include
+SRC=src
+OBJ=obj
+
+.PHONY: all clean realclean
+
+HDRS=$(shell ls $(INC)/*.h)
+all: geometry
+
+geometry: $(OBJ)/geometry.o $(OBJ)/triangle.o $(OBJ)/circle.o
+	@$(CC) -o $@ -I$(INC) $^ -lm
+
+$(OBJ)/geometry.o: $(SRC)/geometry.c $(HDRS)
+	@echo $(HDRS)
+	$(CC) -c -I$(INC) $< -o $@
+
+$(OBJ)/%.o: $(SRC)/%.c $(INC)/%.h 
+	$(CC) -c -I$(INC) $< -o $@
+
+clean:
+	$(RM) $(OBJ)/*.o
+
+realclean: clean
+	$(RM) geometry

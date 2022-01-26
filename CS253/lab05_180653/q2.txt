@@ -1,0 +1,94 @@
+.mode csv
+.import productlines.csv productlines
+
+create table products(
+productCode int primary key,
+productName varchar(50) not null,
+productLine varhar(25) not null,
+productScale varchar(10) not null,
+productVendor varchar(30) not null,
+productDescription varchar(200),
+quantityInStock int,
+buyPrice real,
+MSRP real,
+foreign key(productLine) references productlines(productLine)
+);
+.import products.csv products
+
+create table offices(
+officeCode int primary key not  null,
+city varchar(50) not null,
+phone int ,
+addressLine1 varchar(50) not null,
+addressLine2 varchar(50) ,
+state varchar(25),
+country varchar(25) not null,
+postalCode varchar(25) not null,
+territory varchar(25)
+);
+.import offices.csv offices
+
+create table employees(
+employeeNumber int primary key not null,
+lastName varchar(25) not null,
+firstName varchar(25) not null,
+extension varchar(10) not null,
+email varchar(50) not null,
+officeCode int not null,
+reportsTo int,
+jobTitle varchar(25),
+foreign key(officeCode) references offices(officeCode),
+foreign key(employeeNumber) references employees(employeeNumber)
+);
+.import employees.csv employees
+
+create table customers(
+customerNumber int primary key not null,
+customerName varchar(50),
+contactLastName varchar(50),
+contactFirstName varchar(50),
+phone int not null,
+addressLine1 varchar(100) not null,
+addressLine2 varchar(100),
+city varchar(25) not null,
+state varchar(25),
+postalCode int not null,
+country varchar(50) not null,
+salesRepEmployeeNumber int,
+creditLimit int,
+foreign key(salesRepEmployeeNumber) references employees(employeeNumber)
+);
+.import customers.csv customers
+
+
+create table orders(
+orderNumber int primary key not null,
+orderDate date not null,
+requiredDate date not null,
+shippedDate not null,
+status varchar(25) not null,
+customerNumber int,
+comments varchar(200) ,
+foreign key(customerNumber) references customers(customerNumber)
+);
+.import orders.csv orders
+
+create table orderdetails(
+orderNumber int primary key not null,
+productCode varchar(30) not null,
+quantityOrdered int not null,
+priceEach real not null,
+orderLineNumber int,
+foreign key(productCode) references products(productCode),
+foreign key(productCode) references orders(orderNumber)
+);
+.import orderdetails.csv orderdetails
+
+create table payments(
+checkNumber int primary key not null,
+customerNumber int not null,
+paymentDate date not null,
+amount real not null,
+foreign key(customerNumber) references customers(customerNumber)
+);
+.import payments.csv payments

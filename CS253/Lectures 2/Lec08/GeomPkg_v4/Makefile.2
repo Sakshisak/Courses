@@ -1,0 +1,18 @@
+CC=gcc
+INC=include
+SRC=src
+OBJ=obj
+
+all: geometry
+
+geometry: $(OBJ)/geometry.o $(OBJ)/triangle.o $(OBJ)/circle.o
+	$(CC) -o $@ -I$(INC) $^ -lm
+
+$(OBJ)/geometry.o: $(SRC)/geometry.c $(INC)/circle.h $(INC)/triangle.h
+	$(CC) -o $@ -c -I$(INC) $<
+
+$(OBJ)/circle.o: $(SRC)/circle.c $(INC)/circle.h 
+	$(CC) -o $@ -c -I$(INC) $<
+
+$(OBJ)/triangle.o: $(SRC)/triangle.c $(INC)/triangle.h 
+	$(CC) -o $@ -c -I$(INC) $<

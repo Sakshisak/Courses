@@ -1,0 +1,9 @@
+1. select * from customers where country in ('Japan', 'France', 'USA');
+
+2.SELECT * from orderdetails where quantityOrdered*priceEach between 20 and 100;
+
+3.select status from orders where customerNumber == 124;
+
+4.select (distict) productName from products where productLine == 'Motorcycles';
+
+5.select lastName from employees where officeCode == 4;

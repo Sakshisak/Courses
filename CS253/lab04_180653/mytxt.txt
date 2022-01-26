@@ -1,0 +1,14 @@
+x=63;
+y=414;
+z=x+y;
+c=x-y;
+t1=225;
+t2=275;
+print z-c; print z+c;
+calculate sin(t1+t2)+cos(t1-t2);
+print sin(t1-t2);
+print log(t1+t2);
+calculate log(x+2*y);
+s=log(7*y-3*x);
+print s;
+exit;

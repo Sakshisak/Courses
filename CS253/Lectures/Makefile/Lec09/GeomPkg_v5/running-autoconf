@@ -1,0 +1,24 @@
+autoscan
+	# generates configure.ac
+	# add AM_INIT_AUTOMAKE
+	# Other changes
+	# mv configure.scan configure.ac
+autoreconf -vfi
+#   aclocal
+#   automake --add-missing
+#   autoconf
+
+A sample configure.ac:
+    https://github.com/pileon/shadow-server/blob/pre-cmake/configure.ac
+
+mkdir build
+../configure --prefix=/home/karkare/tmp/install
+make
+make install
+
+
+mkdir debug
+../configure --enable-debug --prefix=/home/karkare/tmp/install
+make
+make install
+

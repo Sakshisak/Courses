@@ -1,0 +1,28 @@
+CC=gcc
+INC=include
+SRC=src
+OBJ=obj
+LIB=obj
+
+.PHONY: all clean realclean
+
+HDRS=$(shell ls $(INC)/*.h)
+all: geometry
+
+geometry: $(OBJ)/geometry.o $(LIB)/libGeom.a
+	$(CC) -o $@ -I$(INC) $< $(LIB)/libGeom.a -lm
+
+$(OBJ)/geometry.o: $(SRC)/geometry.c $(HDRS)
+	$(CC) -c -I$(INC) $< -o $@
+
+$(OBJ)/%.o: $(SRC)/%.c $(INC)/%.h 
+	$(CC) -c -I$(INC) $< -o $@
+
+$(LIB)/libGeom.a: $(OBJ)/circle.o $(OBJ)/triangle.o
+	ar rcs $@ $^
+
+clean:
+	$(RM) $(OBJ)/*.o $(OBJ)/libGeom*
+
+realclean: clean
+	$(RM) geometry
