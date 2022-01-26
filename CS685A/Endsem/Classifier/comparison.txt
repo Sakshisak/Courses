@@ -1,0 +1,27 @@
+================================================================
+----------------------------Accuracy----------------------------
+================================================================
+
+------------------Multiclass Logistic Regression----------------
+
+Scaling: Gaussian Test Size: 10.0% ==> 90.476190%
+Scaling: Gaussian Test Size: 25.0% ==> 89.320388%
+Scaling: Gaussian Test Size: 20.0% ==> 89.156627%
+Scaling: Gaussian Test Size: 30.0% ==> 84.677419%
+Scaling: Gaussian Test Size: 15.0% ==> 90.322581%
+
+Scaling: Normal   Test Size: 10.0% ==> 83.333333%
+Scaling: Normal   Test Size: 25.0% ==> 81.553398%
+Scaling: Normal   Test Size: 20.0% ==> 80.722892%
+Scaling: Normal   Test Size: 30.0% ==> 80.645161%
+Scaling: Normal   Test Size: 15.0% ==> 83.870968%
+
+-------------------Support Vector Classifier--------------------
+
+Test Size: 10.0% ==> 85.714286%
+Test Size: 25.0% ==> 86.407767%
+Test Size: 20.0% ==> 87.951807%
+Test Size: 30.0% ==> 87.096774%
+Test Size: 15.0% ==> 90.322581%
+
+================================================================
